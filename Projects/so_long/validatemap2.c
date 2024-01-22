@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:42:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/20 17:56:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/01/22 11:18:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	flood_fill(t_game *game, int i)
 		flood_fill(game, i + game->width);
 	if ((i - game->width) >= 0 && game->tempmap[i - game->width] != WALL_SYMB
 		&& game->tempmap[i - game->width] != FLOOD_SYMB 
-		&& game->tempmap[i + game->width] != PC_SYMB)
+		&& game->tempmap[i - game->width] != PC_SYMB)
 		flood_fill(game, i - game->width);
 }
 

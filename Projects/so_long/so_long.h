@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:06:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/20 19:23:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/01/22 11:18:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@
 # define ERR_FORMAT		"Error\nInvalid map file format\n"
 # define ERR_MALLOC		"Error\nMalloc failed to allocate memory\n"
 # define ERR_IMAGE		"Error\nImage has failed to be initialted\n"
-
+# define ERR_SIZE		"Error\nMap size too large to display\n"
+# define ERR_ARGS		"Error\nProgram takes exactly 2 arguments\n"
+# define ERR_NOFILE		"Error\nfile name not found\n"
 //enum defines characters found in .ber file
 typedef enum e_map_symb {
 	WALL_SYMB = '1',

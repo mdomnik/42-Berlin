@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:20:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/20 17:27:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/01/22 11:23:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ void	get_map_data(t_game *game, char *map)
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	if (!line)
+	{
+		ft_printf(ERR_NOFILE);
 		free(line);
+		close_connection(game);
+	}
 	close(fd);
 	game->width = (ft_strlen(line)-1);
 	game->height = get_map_height(game, map);
 	game->score = get_collectable_count(game);
+	if ((game->width * 64) > 1920 || (game->height * 64) > 1080)
+	{
+		ft_printf(ERR_SIZE);
+		close_connection(game);
+	}
 	free(line);
 }
 

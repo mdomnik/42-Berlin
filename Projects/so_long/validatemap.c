@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:50:35 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/20 18:02:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/01/22 11:17:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	check_map(t_game *game, char *map)
 	game->tempmap = ft_strdup(game->map);
 	flood_fill(game, 0);
 	error_flood(game);
-	check_format(game, map);
 }
 
 void	check_mins(t_game *game)
@@ -74,7 +73,6 @@ void	check_rect(t_game *game, char *map)
 		if (temp != width || temp == -2)
 		{
 			ft_printf(ERR_NOTRECT);
-			free(line);
 			close_connection(game);
 		}
 	}
