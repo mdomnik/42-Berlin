@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2023/11/15 17:36:56 by mdomnik           #+#    #+#             */
+/*   Updated: 2023/11/16 17:13:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strdup(const char *s1)
 {
-	int		count;
-	char	pc;
+	char	*dest;
+	size_t	i;
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
+	dest = (char *) malloc(ft_strlen(s1) + 1);
+	i = 0;
+	if (!dest)
+		return (NULL);
+	while (s1[i])
 	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
+		dest[i] = s1[i];
+		i++;
 	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
+	dest[i] = 0;
+	return (dest);
 }

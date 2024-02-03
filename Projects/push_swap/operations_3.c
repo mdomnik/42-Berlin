@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   operations_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/02/03 20:35:03 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/02/03 20:45:29 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strrchr(const char *s, int c)
+void rra(t_stack **stack_a)
 {
-	int		count;
-	char	pc;
+	rev_rotate(stack_a);
+	ft_printf("rra\n");
+}
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
-	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
-	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
+void rrb(t_stack **stack_b)
+{
+	rev_rotate(stack_b);
+	ft_printf("rrb\n");
+}
+
+void rrr(t_stack **stack_a, t_stack **stack_b)
+{
+	rev_rotate(stack_a);
+	rev_rotate(stack_b);
+	ft_printf("rrr\n");
 }

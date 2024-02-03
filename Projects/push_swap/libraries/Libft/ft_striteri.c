@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2023/11/19 17:24:52 by mdomnik           #+#    #+#             */
+/*   Updated: 2023/11/19 17:33:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int		count;
-	char	pc;
+	unsigned int		i;
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
+	i = 0; 
+	while (*s)
 	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
+		f(i, s);
+		i++;
+		s++;
 	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
 }

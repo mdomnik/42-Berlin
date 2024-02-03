@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2023/11/13 19:03:19 by mdomnik           #+#    #+#             */
+/*   Updated: 2023/11/16 14:38:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int		count;
-	char	pc;
+	const char	*psrc;
+	char		*pdest;
+	size_t		i;
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
+	psrc = src;
+	pdest = dest;
+	i = 0;
+	if (dest == (void *)0 && src == (void *)0)
+		return (dest);
+	while (i < n)
 	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
+		pdest[i] = psrc[i];
+		i++;
 	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
+	return (dest);
 }

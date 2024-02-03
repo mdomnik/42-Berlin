@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2023/11/19 17:53:53 by mdomnik           #+#    #+#             */
+/*   Updated: 2023/11/19 18:05:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int		count;
-	char	pc;
+	long int	longy;
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
+	longy = n;
+	if (longy < 0)
 	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
+		ft_putchar_fd('-', fd);
+		longy *= -1;
 	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
+	if (longy > 9)
+	{
+		ft_putnbr_fd((longy / 10), fd);
+		longy %= 10;
+	}
+	if (longy <= 9)
+		ft_putchar_fd((longy + 48), fd);
 }

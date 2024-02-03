@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/02/03 19:18:42 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/02/03 19:24:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strrchr(const char *s, int c)
+int check_sort(t_stack *a_stack)
 {
-	int		count;
-	char	pc;
+	t_stack	*clone;
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
+	clone = a_stack;
+	while (clone->next != NULL)
 	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
+		if (clone->data <= clone->next->data)
+			clone = clone->next;
+		else
+			return (0);
 	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
+	return(1);
+}
+
+int	ft_lstsize_ps(t_stack *lst)
+{
+	t_stack	*temp;
+	int		i;
+
+	temp = lst;
+	i = 0;
+	while (temp)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (i);
 }

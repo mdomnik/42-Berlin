@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2023/11/25 15:58:47 by mdomnik           #+#    #+#             */
+/*   Updated: 2023/11/25 21:03:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strrchr(const char *s, int c)
+int	ft_printstr(char *str)
 {
-	int		count;
-	char	pc;
+	int	count;
 
 	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
+	if (str == NULL)
 	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
+		ft_printstr("(null)");
+		return (6);
 	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
+	while (*str)
+	{
+		ft_printchar((int)*str);
+		++str;
+		++count;
+	}
+	return (count);
 }

@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:07:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 00:53:14 by mdomnik          ###   ########.fr       */
+/*   Created: 2023/11/23 15:35:40 by mdomnik           #+#    #+#             */
+/*   Updated: 2023/11/25 20:59:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-char	*ft_strrchr(const char *s, int c)
-{
-	int		count;
-	char	pc;
+# include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-	count = 0;
-	pc = (char)c;
-	while (s[count])
-		count++;
-	while (count > -1)
-	{
-		if (s[count] == pc)
-			return ((char *)&s[count]);
-		count--;
-	}
-	if (s[count] == pc)
-		return ((char *)&s[count]);
-	return (NULL);
-}
+int		ft_printf(const char *format, ...);
+int		ft_printstr(char *c);
+int		ft_printdigit(long n, int base, int booly);
+int		ft_printchar(char c);
+
+#endif

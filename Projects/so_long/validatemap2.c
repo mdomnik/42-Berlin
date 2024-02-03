@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:42:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/22 11:18:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/01/31 01:25:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ void	flood_fill(t_game *game, int i)
 void	check_format(t_game *game, char *map)
 {
 	char	*output;
-	int		i;
 
-	i = game->width;
 	output = ft_strnstr(map, ".ber", ft_strlen(map));
 	if (output == 0)
 	{

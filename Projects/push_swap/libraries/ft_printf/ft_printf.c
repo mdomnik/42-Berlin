@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:32:57 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 01:07:56 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/03 18:25:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	print_input(char specifier, va_list args);
 static int	ft_printaddress(va_list args);
 static int	ft_printaddressdigit(unsigned long long int n);
-
 
 int	ft_printf(const char *format, ...)
 {
