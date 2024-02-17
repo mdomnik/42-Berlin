@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:32:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/03 20:42:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/17 16:37:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,23 @@ void	swap(t_stack **stack)
 
 void	push(t_stack **stack, t_stack **node)
 {
-	t_stack *temp;
-	
-	if (!node)
-		return ;
-	temp = ft_lstnew_ps((*node)->data);
-	ft_lstadd_front_ps(stack, temp);
-	if (ft_lstsize_ps(*node) == 0)
-	{
-		*node = (*node)->next;
-		free((*node)->prev);
-	}
+	t_stack  *push_node;
+    if (!node || !(*node))
+        return ;
+    push_node = ft_lstnew_ps((*node)->data);
+    if (!push_node)
+    {
+        exit(1);
+    }
+    ft_lstadd_front_ps(stack, push_node);
+    if (ft_lstsize_ps(*node) == 1)
+        ft_printf("yoyoyo");
+    else
+    {
+        *node = (*node)->next;
+        if (*node)
+            free((*node)->prev);
+    }
 }
 
 void rev_rotate(t_stack **stack)

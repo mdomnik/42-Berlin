@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:20:15 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/03 20:59:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/17 17:10:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_stack {
 }	t_stack;
 
 //push_swap.c
-void print_stack(t_stack *a_stack); //-to delete
+void print_stack(t_stack *stack); //-to delete
 
 //list_prep.c
 t_stack *pop_stack(t_stack *a_stack, int argc, char **argv);
@@ -39,6 +39,7 @@ t_stack	*ft_lstlast_ps(t_stack *lst);
 //check.c
 int check_sort(t_stack *a_stack);
 int	ft_lstsize_ps(t_stack *lst);
+int datacmp(t_stack *stack_a, t_stack *stack_b);
 
 //utils.c
 void	swap(t_stack **stack);
@@ -68,6 +69,7 @@ void rrr(t_stack **stack_a, t_stack **stack_b);
 //sort_arg_1.c
 void	sort_three(t_stack **stack_a);
 t_stack *get_high_val(t_stack *stack);
+void push_swap(t_stack **stack_a, t_stack **stack_b);
 
 #endif
 
