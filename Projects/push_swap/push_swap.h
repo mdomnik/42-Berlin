@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:20:15 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/17 17:10:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/19 04:10:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@
 # include "libraries/ft_printf/ft_printf.h"
 # include <unistd.h>
 # include <stdlib.h>
+#include <limits.h>
 
 //doubly linked list
 typedef struct s_stack {
 	
-	int   data;
+	int	data;
+	int	index;
+	int cost;
+	int opnum;
+	struct s_stack	*neighbor;
 	struct s_stack *prev;
 	struct s_stack *next;
 }	t_stack;
@@ -67,9 +72,40 @@ void rrb(t_stack **stack_b);
 void rrr(t_stack **stack_a, t_stack **stack_b);
 
 //sort_arg_1.c
-void	sort_three(t_stack **stack_a);
+void	sort_three_a(t_stack **stack_a);
+void	sort_three_b(t_stack **stack_b);
 t_stack *get_high_val(t_stack *stack);
+t_stack *get_low_val(t_stack *stack);
+
+//freeErr.c
+void ft_free(t_stack **stack);
+void freetemp(char **temp);
+void errorescape(t_stack *stack);
+int errors(char *num);
+int error_dup(t_stack *stack, int i);
+
+//ft_split_ps.c
+char	**ft_split_ps(const char *s, char c);
+
+//calc.c
+t_stack *closest_neighbor_node(t_stack *stack_b, t_stack *element);
+t_stack  *closest_val(t_stack *stack_a, t_stack *stack_b);
+void pop_cost_b(t_stack *stack_b);
+void lowest_operator(t_stack *stack);
+t_stack *find_lowest(t_stack *stack);
+
+//big_sort.c
 void push_swap(t_stack **stack_a, t_stack **stack_b);
+void sort_b_stack(t_stack **stack_a, t_stack **stack_b);
+int find_pos(t_stack *stack, int num);
+void pop_cost_a(t_stack *stack_a);
+
+//actions.c
+t_stack *cheapest_operation(t_stack *a_stack, t_stack *b_stack, t_stack *low);
+void rr_sort(t_stack *a_stack, t_stack *b_stack);
+void rrr_sort(t_stack *a_stack, t_stack *b_stack);
+void rrarb_sort(t_stack *a_stack, t_stack *b_stack);
+void rarrb_sort(t_stack *a_stack, t_stack *b_stack);
 
 #endif
 

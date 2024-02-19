@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_ps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 17:41:29 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/18 18:00:09 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/02/18 18:01:09 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/02/18 18:21:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static void	word_array(int word, const char *s, char c, char **ret);
 static int	word_length(int word, char *s, char c);
 static int	word_count(const char *s, char c);
 static void	*freemal(char **strs, int count);
 
-char	**ft_split(const char *s, char c)
+char	**ft_split_ps(const char *s, char c)
 {
 	char	**ret;
 	int		cells;

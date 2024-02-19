@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:20:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/03 19:04:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/19 04:20:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ t_stack *pop_stack(t_stack *a_stack, int argc, char **argv)
 	{
 		while (argv[i])
 		{
+			if (errors(argv[i]) == 1)
+				errorescape(a_stack);
+			if (error_dup(a_stack, ft_atoi(argv[i])))
+				errorescape(a_stack);
 			new = ft_lstnew_ps(ft_atoi(argv[i]));
 			ft_lstadd_back_ps(&a_stack, new);
 			i++;
@@ -37,19 +41,29 @@ t_stack *pop_stack_string(char **argv, t_stack *a_stack)
 {
 	t_stack *new;
 	char	**temp;
-	int		i;
+	int	 i;
 
 	i = 0;
-	temp = argv;
-	temp = ft_split(argv[1], ' ');
+	temp = ft_split_ps(argv[1], ' ');
+	if (!temp)
+	{
+		errorescape(a_stack);
+		return a_stack;
+	}
+
 	while (temp[i])
 	{
+		if (error_dup(a_stack, ft_atoi(temp[i])) || errors(temp[i]) == 1)
+		{
+			freetemp(temp);
+			errorescape(a_stack);
+		}
 		new = ft_lstnew_ps(ft_atoi(temp[i]));
 		ft_lstadd_back_ps(&a_stack, new);
 		i++;
 	}
-	free(temp);
-	return(a_stack);
+	freetemp(temp);
+	return a_stack;
 }
 
 t_stack	*ft_lstnew_ps(int	content)
@@ -60,8 +74,11 @@ t_stack	*ft_lstnew_ps(int	content)
 	if (!element)
 		return (NULL);
 	element->data = content;
+	element->cost = 2147483647;
 	element->next = NULL;
+	element->opnum = 2147483647;
 	element->prev = NULL;
+	element->neighbor = NULL;
 	return (element);
 }
 

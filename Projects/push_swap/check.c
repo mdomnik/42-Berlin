@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:18:42 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/17 17:40:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/19 03:46:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ int	ft_lstsize_ps(t_stack *lst)
 		temp = temp->next;
 		i++;
 	}
-	ft_printf("stack size: %d\n", i);
 	return (i);
 }
 
 int datacmp(t_stack *stack_a, t_stack *stack_b)
 {
-	printf ("a: %d, b: %d\n", stack_a->data, stack_b->data);
 	if (stack_a->data > stack_b->data)
 		return (1);
 	else if (stack_a->data < stack_b->data)

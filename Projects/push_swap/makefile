@@ -6,7 +6,7 @@
 #    By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 13:19:09 by mdomnik           #+#    #+#              #
-#    Updated: 2024/02/17 16:29:42 by mdomnik          ###   ########.fr        #
+#    Updated: 2024/02/19 01:43:03 by mdomnik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra
 LIBS	=	./libraries/Libft/libft.a
 PRINTF	=	./libraries/ft_printf/ft_printf.a
-SRCS	=	push_swap.c list_prep.c check.c utils.c operations_1.c operations_2.c operations_3.c sort_arg_1.c
+SRCS	=	push_swap.c list_prep.c check.c utils.c operations_1.c operations_2.c operations_3.c sort_arg_1.c \
+			freeErr.c ft_split_ps.c calc.c big_sort.c actions.c
 OBJS	=	$(addprefix output/, $(SRCS:.c=.o))
 
 all:		$(NAME)
