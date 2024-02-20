@@ -6,17 +6,17 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:20:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/19 04:20:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:20:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *pop_stack(t_stack *a_stack, int argc, char **argv)
+t_stack	*pop_stack(t_stack *a_stack, int argc, char **argv)
 {
 	t_stack	*new;
-	int	i;
-	
+	int		i;
+
 	new = NULL;
 	i = 1;
 	if (argc <= 1)
@@ -25,9 +25,10 @@ t_stack *pop_stack(t_stack *a_stack, int argc, char **argv)
 	{
 		while (argv[i])
 		{
-			if (errors(argv[i]) == 1)
+			if (errors(argv[i]) == 1 || (ft_atoi_ps(argv[i]) > 2147483647)
+				|| (ft_atoi_ps(argv[i]) < -2147483648))
 				errorescape(a_stack);
-			if (error_dup(a_stack, ft_atoi(argv[i])))
+			if (error_dup(a_stack, ft_atoi_ps(argv[i])))
 				errorescape(a_stack);
 			new = ft_lstnew_ps(ft_atoi(argv[i]));
 			ft_lstadd_back_ps(&a_stack, new);
@@ -37,23 +38,31 @@ t_stack *pop_stack(t_stack *a_stack, int argc, char **argv)
 	return (a_stack);
 }
 
-t_stack *pop_stack_string(char **argv, t_stack *a_stack)
+int	handle_errors(t_stack *a_stack, char *temp)
 {
-	t_stack *new;
+	if (error_dup(a_stack, ft_atoi_ps(temp)) || errors(temp) == 1
+		|| (ft_atoi_ps(temp) > 2147483647)
+		|| (ft_atoi_ps(temp) < -2147483648))
+		return (1);
+	return (0);
+}
+
+t_stack	*pop_stack_string(char **argv, t_stack *a_stack)
+{
+	t_stack	*new;
 	char	**temp;
-	int	 i;
+	int		i;
 
 	i = 0;
 	temp = ft_split_ps(argv[1], ' ');
-	if (!temp)
+	if (!temp || argv[1] == NULL || argv[1][0] == '\0')
 	{
 		errorescape(a_stack);
-		return a_stack;
+		return (a_stack);
 	}
-
 	while (temp[i])
 	{
-		if (error_dup(a_stack, ft_atoi(temp[i])) || errors(temp[i]) == 1)
+		if (handle_errors(a_stack, temp[i]))
 		{
 			freetemp(temp);
 			errorescape(a_stack);
@@ -63,10 +72,10 @@ t_stack *pop_stack_string(char **argv, t_stack *a_stack)
 		i++;
 	}
 	freetemp(temp);
-	return a_stack;
+	return (a_stack);
 }
 
-t_stack	*ft_lstnew_ps(int	content)
+t_stack	*ft_lstnew_ps(int content)
 {
 	t_stack	*element;
 
@@ -98,19 +107,4 @@ void	ft_lstadd_back_ps(t_stack **lst, t_stack *new)
 		new->prev = last;
 		new->next = NULL;
 	}
-
-}
-
-t_stack	*ft_lstlast_ps(t_stack *lst)
-{
-	t_stack	*temp;
-
-	if (!lst)
-		return (NULL);
-	temp = lst;
-	while (temp->next)
-	{
-		temp = temp->next;
-	}
-	return (temp);
 }

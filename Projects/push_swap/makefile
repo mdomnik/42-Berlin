@@ -6,17 +6,17 @@
 #    By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 13:19:09 by mdomnik           #+#    #+#              #
-#    Updated: 2024/02/19 01:43:03 by mdomnik          ###   ########.fr        #
+#    Updated: 2024/02/20 00:08:41 by mdomnik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	push_swap
 CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g
 LIBS	=	./libraries/Libft/libft.a
 PRINTF	=	./libraries/ft_printf/ft_printf.a
 SRCS	=	push_swap.c list_prep.c check.c utils.c operations_1.c operations_2.c operations_3.c sort_arg_1.c \
-			freeErr.c ft_split_ps.c calc.c big_sort.c actions.c
+			freeErr.c ft_split_ps.c calc.c big_sort.c actions.c finish.c ft_atoi_ps.c
 OBJS	=	$(addprefix output/, $(SRCS:.c=.o))
 
 all:		$(NAME)

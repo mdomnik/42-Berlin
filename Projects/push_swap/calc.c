@@ -6,19 +6,19 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:13:10 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/19 03:00:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:49:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *closest_neighbor_node(t_stack *stack_b, t_stack *element) 
+t_stack	*closest_neighbor_node(t_stack *stack_b, t_stack *element)
 {
-	t_stack *temp_b = stack_b;
-	t_stack *closest_neighbor;
-	int closest_diff;
-	int current_diff;
-	
+	t_stack	*temp_b;
+	t_stack	*closest_neighbor;
+	int		closest_diff;
+	int		current_diff;
+
 	temp_b = stack_b;
 	closest_neighbor = NULL;
 	closest_diff = 2147483647;
@@ -27,95 +27,86 @@ t_stack *closest_neighbor_node(t_stack *stack_b, t_stack *element)
 		current_diff = temp_b->data - element->data;
 		if (current_diff < 0)
 			current_diff = -current_diff;
-		if (current_diff < closest_diff)
+		if (current_diff < closest_diff || (current_diff == closest_diff 
+				&& temp_b->data < closest_neighbor->data))
 		{
 			closest_diff = current_diff;
 			closest_neighbor = temp_b;
 		}
 		temp_b = temp_b->next;
 	}
-	return closest_neighbor;
+	return (closest_neighbor);
 }
 
-t_stack *closest_val(t_stack *stack_a, t_stack *stack_b) {
-	t_stack *temp_a;
-	t_stack *closest_neighbor;
-	
+t_stack	*closest_val(t_stack *stack_a, t_stack *stack_b)
+{
+	t_stack	*temp_a;
+	t_stack	*closest_neighbor;
+
 	temp_a = stack_a;
 	closest_neighbor = NULL;
-	while (temp_a != NULL) {
+	while (temp_a != NULL) 
+	{
 		closest_neighbor = closest_neighbor_node(stack_b, temp_a);
 		temp_a->neighbor = closest_neighbor;
 		temp_a = temp_a->next;
 	}
-	return stack_a;
+	return (stack_a);
 }
 
-void pop_cost_b(t_stack *stack_b)
+void	pop_cost_b(t_stack **stack_b)
 {
-	t_stack *temp;
+	t_stack	*temp;
 	int		index;
 	int		lstsize;
 
 	index = 0;
-	temp = stack_b;
+	temp = *stack_b;
 	lstsize = ft_lstsize_ps(temp);
 	while (temp != NULL)
 	{
 		temp->index = index;
 		if ((lstsize / 2) >= temp->index)
-			temp->cost = temp->index + 1;
+			temp->cost = temp->index;
 		else
-			temp->cost = temp->index - (lstsize + 1);
+			temp->cost = temp->index - (lstsize);
 		index++;
 		temp = temp->next;
 	}
 }
 
-void lowest_operator(t_stack *stack)
+void	assign_opnum(t_stack *temp, int cost, int neicost)
 {
-	t_stack *temp;
-
-	temp = stack;
-	while(temp != NULL)
-	{
-		if ((temp->cost > 0) && (temp->neighbor->cost > 0) && (temp->cost > temp->neighbor->cost))
-				temp->opnum = temp->cost;
-		else if ((temp->cost > 0) && (temp->neighbor->cost > 0) && (temp->cost < temp->neighbor->cost))
-				temp->opnum = temp->neighbor->cost;
-		else if ((temp->cost < 0) && (temp->neighbor->cost < 0) && (temp->cost < temp->neighbor->cost))
-			temp->opnum = temp->cost;
-		else if ((temp->cost < 0) && (temp->neighbor->cost < 0) && (temp->cost > temp->neighbor->cost))
-			temp->opnum = temp->neighbor->cost;
-		else if ((temp->cost < 0) && (temp->neighbor->cost > 0))
-			temp->opnum = (temp->neighbor->cost + (temp->cost * (-1)));
-		else if ((temp->cost > 0) && (temp->neighbor->cost < 0))
-			temp->opnum = ((temp->neighbor->cost * (-1)) + temp->cost);
-		else
-			temp->opnum = temp->cost;
-		temp = temp->next;
-	}
+	if ((cost >= 0) && (neicost >= 0) && (cost > neicost))
+		temp->opnum = cost;
+	else if ((cost >= 0) && (neicost >= 0) && (cost < neicost))
+		temp->opnum = neicost;
+	else if ((cost < 0) && (neicost < 0) && (cost < neicost))
+		temp->opnum = cost;
+	else if ((cost < 0) && (neicost < 0) && (cost > neicost))
+		temp->opnum = neicost;
+	else if ((cost < 0) && (neicost >= 0))
+		temp->opnum = (neicost + (cost * (-1)));
+	else if ((cost >= 0) && (neicost < 0))
+		temp->opnum = ((neicost * (-1)) + cost);
+	else
+		temp->opnum = cost;
 }
 
-t_stack *find_lowest(t_stack *stack)
+void	lowest_operator(t_stack *stack)
 {
-	t_stack *temp;
-	t_stack	*low;
-	int		i;
+	t_stack	*temp;
+	int		cost;
+	int		neicost;
 
 	temp = stack;
-	low = stack;
 	while (temp != NULL)
 	{
-		if (low->opnum < 0)
-			i = low->opnum * (-1);
-		else
-			i = low->opnum;
-		if ((temp->opnum > 0) && (temp->opnum < low->opnum))
-			low->opnum = temp->opnum;
-		else if ((temp->opnum < 0) && (temp->opnum > low->opnum))
-			low->opnum = temp->opnum;
+		cost = temp->cost;
+		neicost = temp->neighbor->cost;
+		assign_opnum(temp, cost, neicost);
+		if (temp->opnum < 0)
+			temp->opnum *= -1;
 		temp = temp->next;
 	}
-	return (low);
 }

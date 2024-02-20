@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_ps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 16:22:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/20 00:07:43 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/02/20 00:08:14 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/02/20 01:49:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c);
+#include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi_ps(const char *str)
 {
-	int	i;
-	int	sign;
-	int	result;
+	long	i;
+	long	sign;
+	long	result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (ft_isspace(str[i]) == 1)
+	while (ft_isspace_ps(str[i]) == 1)
 		i++;
 	if (str[i] == '+' && str[i + 1] != '-')
 		i++;
@@ -40,9 +40,29 @@ int	ft_atoi(const char *str)
 	return (result);
 }
 
-static int	ft_isspace(int c)
+int	ft_isspace_ps(int c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
 	return (0);
+}
+
+t_stack	*find_lowest(t_stack *stack)
+{
+	t_stack	*temp;
+	t_stack	*low;
+
+	temp = stack;
+	low = stack;
+	while (temp != NULL)
+	{
+		if (low->opnum < 0)
+			low->opnum = low->opnum * (-1);
+		if (temp->opnum < 0)
+			temp->opnum = temp->opnum * (-1);
+		if (temp->opnum < low->opnum)
+			low = temp;
+		temp = temp->next;
+	}
+	return (low);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:01:09 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/18 18:21:43 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/20 00:44:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ char	**ft_split_ps(const char *s, char c)
 	char	**ret;
 	int		cells;
 
+	ret = NULL;
 	cells = 0;
-	if (!s)
+	if (!s || s[0] == '\0')
 	{
-		ret = (char **)malloc(1);
-		ret[0] = NULL;
 		return (ret);
 	}
 	ret = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));

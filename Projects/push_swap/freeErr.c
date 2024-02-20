@@ -6,15 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:25:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/18 18:26:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/20 00:59:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_free(t_stack **stack)
+void	ft_free(t_stack **stack)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	if (!stack)
 		return ;
@@ -27,19 +27,19 @@ void ft_free(t_stack **stack)
 	*stack = NULL;
 }
 
-void errorescape(t_stack *stack)
+void	errorescape(t_stack *stack)
 {
 	ft_free(&stack);
 	ft_printf("Error\n");
 	exit(1);
 }
 
-void freetemp(char **temp)
+void	freetemp(char **temp)
 {
 	int	i;
 
 	i = 0;
-	while(temp[i])
+	while (temp[i])
 	{
 		free(temp[i]);
 		i++;
@@ -47,12 +47,13 @@ void freetemp(char **temp)
 	free(temp);
 }
 
-int errors(char *num)
+int	errors(char *num)
 {
 	if (!(*num == '-' || (*num >= '0' && *num <= '9')))
 		return (1);
 	if (*num == '-' && !(num[1] >= '0' && num[1] <= '9'))
 		return (1);
+	num++;
 	while (*num)
 	{
 		if (!(*num >= '0' && *num <= '9'))
@@ -60,10 +61,9 @@ int errors(char *num)
 		num++;
 	}
 	return (0);
-
 }
 
-int error_dup(t_stack *stack, int i)
+int	error_dup(t_stack *stack, long i)
 {
 	if (!stack)
 		return (0);

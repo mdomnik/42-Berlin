@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:32:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/19 03:53:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:11:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	swap(t_stack **stack)
 
 void	push(t_stack **stack, t_stack **node)
 {
-	t_stack  *push_node;
-	
-    if (node == NULL)
-        return ;
-    push_node = *node;
+	t_stack	*push_node;
+
+	if (node == NULL)
+		return ;
+	push_node = *node;
 	*node = (*node)->next;
-    if (*node)
+	if (*node)
 		(*node)->prev = NULL;
-    push_node->prev = NULL;
+	push_node->prev = NULL;
 	if (*stack == NULL)
 	{
 		*stack = push_node;
@@ -49,12 +49,12 @@ void	push(t_stack **stack, t_stack **node)
 	}
 }
 
-void rev_rotate(t_stack **stack)
+void	rev_rotate(t_stack **stack)
 {
-	t_stack *tail;
+	t_stack	*tail;
 	t_stack	*head;
 	t_stack	*onebeforetail;
-	
+
 	head = *stack;
 	tail = ft_lstlast_ps(*stack);
 	onebeforetail = tail->prev;
@@ -63,12 +63,12 @@ void rev_rotate(t_stack **stack)
 	onebeforetail->next = NULL;
 }
 
-void rotate(t_stack **stack)
+void	rotate(t_stack **stack)
 {
 	t_stack	*head;
-	t_stack *second;
+	t_stack	*second;
 	t_stack	*tail;
-	
+
 	head = *stack;
 	second = (*stack)->next;
 	tail = ft_lstlast_ps(*stack);
@@ -77,11 +77,10 @@ void rotate(t_stack **stack)
 	{
 		second->prev = NULL;
 		head->prev = tail;
-		head->next= NULL;
+		head->next = NULL;
 		*stack = second;
 	}
 }
-
 
 void	ft_lstadd_front_ps(t_stack **lst, t_stack *new)
 {
@@ -90,7 +89,7 @@ void	ft_lstadd_front_ps(t_stack **lst, t_stack *new)
 	head = *lst;
 	if (lst)
 	{
-		if(head)
+		if (head)
 		{
 			new->next = head;
 			head->prev = new;
