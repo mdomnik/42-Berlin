@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:42:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/01/31 01:25:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/01/25 16:46:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ void	check_haswalls(t_game *game)
 	}
 }
 
+// game->tempmap[i + 1] == right
+// game->tempmap[i - 1] == right
+// game->tempmap[i + game->width] == down
+// game->tempmap[i - game->width] == right
+//
+//
+//
+
 void	flood_fill(t_game *game, int i)
 {
 	if (i == 0) 
@@ -71,7 +79,9 @@ void	flood_fill(t_game *game, int i)
 void	check_format(t_game *game, char *map)
 {
 	char	*output;
+	int		i;
 
+	i = game->width;
 	output = ft_strnstr(map, ".ber", ft_strlen(map));
 	if (output == 0)
 	{
