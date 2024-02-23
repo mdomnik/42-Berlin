@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:47:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/20 17:18:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/23 15:59:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,24 @@
 #include <unistd.h>
 #include <signal.h>
 
-int	binarytodecimal(char *binary_char)
-{
-	int	decimal;
-
-	while (*binary_char != '\0')
-	{
-		decimal = decimal * 2 + (*binary_char - 0);
-		binary_char++;
-	}
-	
-	return (decimal);
-}
 
 void signal_handler(int	signal)
 {
-	static char		binary_char[9];
-	static	int		i;
-	int				decimal;
+	static unsigned char		letter;
+	static int		iter = 0;
 
-	if (!i)
-		i = 0;
 	if (signal == SIGUSR1)
-		binary_char[i] = '0';
+		letter |= (0 << iter);
 	else
-		binary_char[i] = '1';
-	i++;
-	if (i == 8)
+		letter |= (1 << iter);
+	iter++;
+	if(iter == 8)
 	{
-		binary_char[8] = '\0';
-		decimal = binarytodecimal(binary_char);
-		ft_printf("%c", (char)decimal);
+		ft_putchar_fd(letter, 1);
+		iter = 0;
+		letter = 0;
 	}
 }
-
 int main (void)
 {
 	signal(SIGUSR1, signal_handler);

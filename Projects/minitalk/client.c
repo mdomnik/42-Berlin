@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:46:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/20 17:20:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:01:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	send_message(int pid, char *message)
 			if(chdec & binnumdec)
 				kill(pid, SIGUSR1);
 			else
-				kill(pid, SIGUSR2);
+				kill(pid, SIGUSR1);
 			usleep(100);
 			binnumdec /= 2;
 		}
