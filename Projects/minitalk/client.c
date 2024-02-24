@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:46:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/23 16:01:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/24 20:05:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,28 @@
 void	send_message(int pid, char *message)
 {
 	int	i;
-	int binnumdec;
-	int	chdec;
-
+	int	letter;
+	int	bit_count;
+	int	bit;
+	
 	i = 0;
 	while(message[i] != '\0')
 	{
-		chdec = message[i];
-		binnumdec = 128;
-		while (binnumdec > 0)
-		{
-			if(chdec & binnumdec)
+		letter = message[i];
+		bit_count = 0;
+		while (bit_count <= 7)
+		{	
+			bit = (letter >> bit_count) & 1; 
+			if(bit == 0)
+			{
 				kill(pid, SIGUSR1);
+			}
 			else
-				kill(pid, SIGUSR1);
+			{
+				kill(pid, SIGUSR2);
+			}
 			usleep(100);
-			binnumdec /= 2;
+			bit_count++;
 		}
 		i++;
 	}

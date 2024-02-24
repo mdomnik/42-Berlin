@@ -6,33 +6,28 @@
 #    By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 12:38:48 by mdomnik           #+#    #+#              #
-#    Updated: 2024/02/20 17:20:24 by mdomnik          ###   ########.fr        #
+#    Updated: 2024/02/24 20:03:47 by mdomnik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CLIENT	=	client
+CLIENT  =   client
+SERVER  =   server
+PRINTF  =   ./libraries/ft_printf/libftprintf.a
+LIBS    =   ./libraries/Libft/libft.a
+CC      =   cc
+CFLAGS  =   -Wall -Werror -Wextra
+SSRC    =   server.c
+CSRC    =   client.c
+SOBJS   =   $(addprefix output/, $(SSRC:.c=.o))
+COBJS   =   $(addprefix output/, $(CSRC:.c=.o))
 
-SERVER	=	server
+all: $(SERVER) $(CLIENT)
 
-PRINTF	=	./libraries/ft_printf/libftprintf.a
+$(SERVER): $(SOBJS)
+	$(CC) $(CFLAGS) $^ $(LIBS) $(PRINTF) -o $@
 
-LIBS	=	./libraries/Libft/libft.a
-
-CC		=	cc
-
-CFLAGS	=	-Wall -Werror -Wextra
-
-SSRC	=	server.c\
-
-CSRC	=	client.c\
-
-OBJS	=	$(addprefix output/, $(SSRC:.c=.o), $(CSRC:.c=.o))
-
-all:
-	make -C ./libraries/Libft
-	make -C ./libraries/ft_printf
-	$(CC) $(CFLAGS) $(SSRC) $(LIBS) $(PRINTF) -o $(SERVER)
-	$(CC) $(CFLAGS) $(CSRC) $(LIBS) $(PRINTF) -o $(CLIENT)
+$(CLIENT): $(COBJS)
+	$(CC) $(CFLAGS) $^ $(LIBS) $(PRINTF) -o $@
 
 output/%.o: %.c | output
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -45,10 +40,10 @@ clean:
 	make clean -C ./libraries/ft_printf
 	rm -rf output
 
-fclean:	clean
+fclean: clean
 	rm -rf $(SERVER)
 	rm -rf $(CLIENT)
 
-re:		 fclean all
+re: fclean all
 
 .PHONY: all clean fclean re
