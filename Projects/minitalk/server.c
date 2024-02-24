@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:47:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/02/24 20:11:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/02/24 20:29:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ void	signal_handler(int signal)
 	}
 }
 
-int	main(void)
+void	config_sygnals(void)
 {
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
-	ft_printf("Server PID [%d] | ./client <PID> <message>\n", getpid());
+}
+
+int	main(void)
+{
+	ft_printf("Server PID [%d]\n", getpid());
 	while (1)
-		sleep(1);
+		config_sygnals();
 	return (0);
 }
